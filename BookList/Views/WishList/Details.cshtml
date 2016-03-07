@@ -1,0 +1,41 @@
+﻿@model BookList.Models.WishList
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>WishList</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.WishListBookName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WishListBookName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WishListBookAuthor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WishListBookAuthor)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.WishListBookGenre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WishListBookGenre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.WishListID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,66 @@
+﻿@using Microsoft.AspNet.Identity
+@using System.Security.Claims
+
+@if (Request.IsAuthenticated)
+{
+    var identity = (ClaimsIdentity)User.Identity;
+    var name = identity.FindFirstValue(ClaimTypes.GivenName) ?? identity.GetUserName();
+   
+    <div class="dashboardWelcome">
+        <h2> @Html.DisplayName(name + "'s Book List")</h2>
+        <h5>BookListX</h5>
+    </div>
+    <hr />
+
+}
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = "DashBoard ";
+}
+
+
+
+<div class="row">
+    <div class="col-xs-12 col-sm-7 col-md-5">
+        <div class="row">
+            <a href="@Url.Action("index", "BooksRead")">
+                <div class="viewBookList" >
+                    <div class="col-xs-6 lineVertical">
+                        <img src="~/Content/img/books.png" />
+
+                    </div>
+
+                    <div class="col-xs-6">
+                        <h3>My Read List</h3>
+                        <p> View list of books you already read</p>
+
+                    </div>
+                </div>
+            </a>
+        </div>
+       
+        <div class="row">
+            <a href="@Url.Action("Index", "WishList")">
+                <div class="viewBookList">
+                    <div class="col-xs-6 lineVertical">
+                        <img src="~/Content/img/books.png" />
+
+                    </div>
+
+                    <div class="col-xs-6">
+                        <h3>My Wish List</h3>
+                        <p> View list of books you wish to read next</p>
+
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-5 col-md-7">
+        <img class="img-rounded img-responsive dashboardImg" src="~/Content/img/bookstack.jpg" />
+    </div>
+
+</div>

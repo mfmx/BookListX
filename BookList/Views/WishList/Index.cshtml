@@ -1,0 +1,81 @@
+﻿@using Microsoft.AspNet.Identity
+@using System.Security.Claims
+@model IEnumerable<BookList.Models.DisplayWishList>
+
+@if (Request.IsAuthenticated)
+{
+    var identity = (ClaimsIdentity)User.Identity;
+    var name = identity.FindFirstValue(ClaimTypes.GivenName) ?? identity.GetUserName();
+
+
+    <h2> @Html.DisplayName(name + "'s Wish List")</h2>
+}
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+
+    <h4>Wish List</h4>
+
+
+    <div class="RWButton">
+        <div class="btn btn-danger enterCreateBook">
+            @Html.ActionLink("Enter Book", "Create")
+        </div>
+
+        <div class="btn btn-danger enterCreateBook">
+            @Html.ActionLink("Go to Read List", "Index", "BooksRead")
+        </div>
+        <div class="btn btn-danger enterCreateBook">
+            @Html.ActionLink("Back to Book List", "DashBoard", "Home")
+        </div>
+    </div>
+
+
+<div class="table-responsive">
+    <table class="table table-hover">
+            <tr>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Author)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Genre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DateEntered)
+                </th>
+                <th>
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Author)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Genre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateEntered)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.WishListID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.WishListID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.WishListID })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>

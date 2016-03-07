@@ -1,0 +1,51 @@
+﻿@model IEnumerable<BookList.Models.PersonBook>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PersonBookID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BookReadReview)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BookReadID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BookDateEntered)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PersonBookID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BookReadReview)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BookReadID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BookDateEntered)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "DetailsForAdmin", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

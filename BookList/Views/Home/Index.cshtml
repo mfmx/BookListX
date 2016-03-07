@@ -1,0 +1,31 @@
+﻿@using System.Security.Claims
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Let's Read</h1>
+    <p class="lead">BookListX is a free application where you can keep track of books you read and also books you wish to read. Hurry and <em>Sign Up!!</em> </p>
+    <p><a href="@Url.Action("About", "Home")" class="btn btn-danger btn-lg">Learn more &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-sm-6">
+        <h1>Blog it out</h1>
+        <p class="lead">BookListX has a new feature coming out soon</p>
+        <p class="">You will soon be able to share comments and recommendation of books you have read with the world' readers. </p>
+       <hr />
+@if (Request.IsAuthenticated)
+{
+        <div>
+            <h1>My Book List</h1>
+            <p><a href="@Url.Action("Dashboard", "Home")" class="btn btn-danger btn-lg">Go to My Book List &raquo;</a></p>
+
+        </div>}
+    </div>
+
+    <div class="col-sm-6">
+        <img class="img-rounded img-responsive"  src="~/Content/img/bckgbook.jpg"/>
+    </div>
+    
+</div>
