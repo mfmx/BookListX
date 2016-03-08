@@ -15,3 +15,23 @@
     <strong>Support:</strong>   <a href="mailto:mxavier1689@gmail.com">Support@booklistx.com</a><br />
     <strong>Marketing:</strong> <a href="mailto:mxavier1689@gmail.com">Marketing@booklistx.com</a>
 </address>
+
+@* -----Using ajax*@
+<div id="formSection">
+    <h3>@ViewBag.TheMessage</h3>
+    @using (Ajax.BeginForm(new AjaxOptions { HttpMethod = "post", InsertionMode = InsertionMode.Replace, UpdateTargetId = "formSection" }))
+    {
+        <textarea name="message"></textarea>
+        <input type="submit" value="send" />
+    }
+
+</div>
+
+
+
+
+@section scripts{
+
+    
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+}

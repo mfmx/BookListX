@@ -54,3 +54,5 @@ c:\users\maria.xavier\documents\visual studio 2015\Projects\BookList\BookList.Te
 c:\users\maria.xavier\documents\visual studio 2015\Projects\BookList\BookList.Tests\obj\Debug\BookList.Tests.csprojResolveAssemblyReference.cache
 c:\users\maria.xavier\documents\visual studio 2015\Projects\BookList\BookList.Tests\obj\Debug\BookList.Tests.dll
 c:\users\maria.xavier\documents\visual studio 2015\Projects\BookList\BookList.Tests\obj\Debug\BookList.Tests.pdb
+C:\Users\maria.xavier\documents\visual studio 2015\Projects\BookList\BookList.Tests\bin\Debug\Microsoft.Owin.Security.Facebook.dll
+C:\Users\maria.xavier\documents\visual studio 2015\Projects\BookList\BookList.Tests\bin\Debug\Microsoft.Owin.Security.Facebook.xml

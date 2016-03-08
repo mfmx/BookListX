@@ -22,9 +22,18 @@ namespace BookList.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Get in touch with us.";
 
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult Contact(string message)
+        {
+            //TODO : send message to HQ
+            ViewBag.TheMessage = "Thanks we got your msg.";
+
+            return PartialView("_ContactThanks");
         }
         public ActionResult DashBoard()
         {

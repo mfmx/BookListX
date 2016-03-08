@@ -13,6 +13,7 @@ namespace BookList.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
+            //AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(BookList.Models.ApplicationDbContext context)
