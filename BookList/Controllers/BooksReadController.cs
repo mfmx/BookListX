@@ -92,11 +92,13 @@ namespace BookList.Controllers
 
                     db.BooksReads.Add(newBook);
 
+
                     var newPB = new PersonBook();
                     newPB.BookDateEntered = displayBook.DateEntered;
                     newPB.BookReadID = newBook.BookReadID;
                     newPB.Id = user.Id;
 
+                   
                     db.PersonBooks.Add(newPB);
                     db.SaveChanges();
                     
@@ -107,7 +109,7 @@ namespace BookList.Controllers
                 {
                     var newPB = new PersonBook();
                     newPB.BookDateEntered = displayBook.DateEntered;
-                    newPB.BookReadID = addBook.ElementAt(0).BookReadID;
+                    newPB.BookReadID = addBook.First().BookReadID;
                     newPB.Id = user.Id;
 
                     db.PersonBooks.Add(newPB);
