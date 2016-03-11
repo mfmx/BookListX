@@ -28,7 +28,7 @@ namespace BookList.Controllers
             var results = (from PB in db.PersonBooks
                            join BR in db.BooksReads on PB.BookReadID equals BR.BookReadID
                            where PB.Id == user.Id
-                           select new DisplayBook() { Author = BR.BookReadAuthor, Name = BR.BookReadName, Genre = BR.BookReadGenre, DateEntered = PB.BookDateEntered, BookReadID = BR.BookReadID });
+                           select new DisplayBook() { Author = BR.BookReadAuthor, Name = BR.BookReadName, Genre = BR.BookReadGenre, DateEntered = PB.BookDateEntered, BookReadID = BR.BookReadID, PersonBookID = PB.PersonBookID });
             return View(results);
 
         }
@@ -73,16 +73,51 @@ namespace BookList.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "BookReadID, Name,Author,Genre, DateEntered")] BooksRead booksRead)
+        public ActionResult Create([Bind(Include = "BookReadID, Name,Author,Genre, DateEntered")] DisplayBook displayBook)
         {
             if (ModelState.IsValid)
             {
-                db.BooksReads.Add(booksRead);
-                db.SaveChanges();
+                var addBook = (from a in db.BooksReads
+                               where a.BookReadName == displayBook.Name
+                               select a);
+                var us = User.Identity.Name;
+                var user = db.Users.FirstOrDefault(x => x.Email == us);
+
+                if (addBook.Count() == 0)
+                {
+                    var newBook = new BooksRead();
+                    newBook.BookReadName = displayBook.Name;
+                    newBook.BookReadGenre = displayBook.Genre;
+                    newBook.BookReadAuthor = displayBook.Author;
+
+                    db.BooksReads.Add(newBook);
+
+                    var newPB = new PersonBook();
+                    newPB.BookDateEntered = displayBook.DateEntered;
+                    newPB.BookReadID = newBook.BookReadID;
+                    newPB.Id = user.Id;
+
+                    db.PersonBooks.Add(newPB);
+                    db.SaveChanges();
+                    
+                    
+                   
+                }
+                else
+                {
+                    var newPB = new PersonBook();
+                    newPB.BookDateEntered = displayBook.DateEntered;
+                    newPB.BookReadID = addBook.ElementAt(0).BookReadID;
+                    newPB.Id = user.Id;
+
+                    db.PersonBooks.Add(newPB);
+                    db.SaveChanges();
+
+                }
                 return RedirectToAction("Index");
             }
 
-            return View(booksRead);
+            return View(displayBook);
         }
 
         // GET: BooksRead/Edit/5
@@ -92,12 +127,22 @@ namespace BookList.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BooksRead booksRead = db.BooksReads.Find(id);
-            if (booksRead == null)
+            var us = User.Identity.Name;
+            var user = db.Users.FirstOrDefault(x => x.Email == us);
+
+
+            var books = db.PersonBooks.Where(x => x.Id == user.Id);
+            var results = (from PB in db.PersonBooks
+                           join BR in db.BooksReads on PB.BookReadID equals BR.BookReadID
+                           where PB.Id == user.Id && PB.PersonBookID == id.Value
+                           select new DisplayBook() { Author = BR.BookReadAuthor, Name = BR.BookReadName, Genre = BR.BookReadGenre, DateEntered = PB.BookDateEntered, BookReadID = BR.BookReadID, PersonBookID = PB.PersonBookID });
+
+
+            if (results == null)
             {
                 return HttpNotFound();
             }
-            return View(booksRead);
+            return View(results.First());
         }
 
         // POST: BooksRead/Edit/5
@@ -105,15 +150,35 @@ namespace BookList.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "BookReadID,BookReadName,BookReadAuthor,BookReadGenre, BookEnteredDate")] BooksRead booksRead)
+        public ActionResult Edit([Bind(Include = "BookReadID, Name,Author,Genre, DateEntered")] DisplayBook displayBook)
         {
+            
             if (ModelState.IsValid)
             {
-                db.Entry(booksRead).State = EntityState.Modified;
+                var us = User.Identity.Name;
+                var user = db.Users.FirstOrDefault(x => x.Email == us);
+
+
+                var books = db.PersonBooks.Where(x => x.Id == user.Id);
+                var personBook = (from PB in db.PersonBooks
+                                  where PB.PersonBookID == displayBook.PersonBookID
+                                  select PB).First();
+                personBook.BookDateEntered = displayBook.DateEntered;
+
+
+                var bookReads = (from BR in db.BooksReads
+                                 where BR.BookReadID == displayBook.BookReadID
+                                 select BR).First();
+                bookReads.BookReadName = displayBook.Name;
+                bookReads.BookReadAuthor = displayBook.Author;
+                bookReads.BookReadGenre = displayBook.Genre;
+                db.Entry(bookReads).State = EntityState.Modified;
+
+                db.Entry(personBook).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(booksRead);
+            return View(displayBook);
         }
 
         // GET: BooksRead/Delete/5
