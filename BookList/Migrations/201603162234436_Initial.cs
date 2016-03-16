@@ -3,7 +3,7 @@ namespace BookList.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class Initial : DbMigration
     {
         public override void Up()
         {
@@ -15,7 +15,6 @@ namespace BookList.Migrations
                         BookReadName = c.String(),
                         BookReadAuthor = c.String(),
                         BookReadGenre = c.String(),
-                        BookEnteredDate = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.BookReadID);
             
@@ -23,13 +22,12 @@ namespace BookList.Migrations
                 "dbo.PersonBooks",
                 c => new
                     {
-                        Id = c.String(nullable: false, maxLength: 128),
-                        PersonBookID = c.Int(nullable: false),
-                        BookReadReview = c.String(),
+                        PersonBookID = c.Int(nullable: false, identity: true),
                         BookReadID = c.Int(nullable: false),
-                        WishListID = c.Int(nullable: false),
+                        Id = c.String(),
+                        BookDateEntered = c.DateTime(nullable: false),
                     })
-                .PrimaryKey(t => t.Id);
+                .PrimaryKey(t => t.PersonBookID);
             
             CreateTable(
                 "dbo.AspNetRoles",
@@ -103,12 +101,12 @@ namespace BookList.Migrations
                 "dbo.WishLists",
                 c => new
                     {
-                        WishListID = c.Int(nullable: false, identity: true),
-                        WishListBookName = c.String(),
-                        WishListBookAuthor = c.String(),
-                        WishListBookGenre = c.String(),
+                        Id = c.String(nullable: false, maxLength: 128),
+                        WishListID = c.Int(nullable: false),
+                        BookReadID = c.Int(nullable: false),
+                        BookDateEntered = c.DateTime(nullable: false),
                     })
-                .PrimaryKey(t => t.WishListID);
+                .PrimaryKey(t => t.Id);
             
         }
         

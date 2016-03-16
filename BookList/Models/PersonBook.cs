@@ -9,12 +9,15 @@ namespace BookList.Models
 {
     public class PersonBook
     {
+        [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int PersonBookID { get; set; }
 
-        public string BookReadReview { get; set; }
+      
+
+        
         public int BookReadID { get; set; }
-        //public int WishListID { get; set; }
+      
         public string Id { get; set; }
 
         [Display(Name = "Date Entered ")]

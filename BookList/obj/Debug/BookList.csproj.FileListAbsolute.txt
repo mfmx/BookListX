@@ -80,9 +80,5 @@ c:\users\maria.xavier\documents\visual studio 2015\Projects\BookList\BookList\bi
 c:\users\maria.xavier\documents\visual studio 2015\Projects\BookList\BookList\obj\Debug\BookList.csprojResolveAssemblyReference.cache
 c:\users\maria.xavier\documents\visual studio 2015\Projects\BookList\BookList\obj\Debug\BookList.dll
 c:\users\maria.xavier\documents\visual studio 2015\Projects\BookList\BookList\obj\Debug\BookList.pdb
-C:\Users\maria.xavier\documents\visual studio 2015\Projects\BookList\BookList\obj\Debug\BookList.Migrations.InitialCreate.resources
+C:\Users\maria.xavier\documents\visual studio 2015\Projects\BookList\BookList\obj\Debug\BookList.Migrations.Initial.resources
 C:\Users\maria.xavier\documents\visual studio 2015\Projects\BookList\BookList\obj\Debug\BookList.csproj.GenerateResource.Cache
-C:\Users\maria.xavier\documents\visual studio 2015\Projects\BookList\BookList\obj\Debug\BookList.Migrations.Migration1.resources
-C:\Users\maria.xavier\documents\visual studio 2015\Projects\BookList\BookList\obj\Debug\BookList.Migrations.Migration2.resources
-C:\Users\maria.xavier\documents\visual studio 2015\Projects\BookList\BookList\obj\Debug\BookList.Migrations.Migration21.resources
-C:\Users\maria.xavier\documents\visual studio 2015\Projects\BookList\BookList\obj\Debug\BookList.Migrations.Migration3.resources
