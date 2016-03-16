@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -8,6 +9,7 @@ namespace BookList.Models
 {
     public class PersonBook
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int PersonBookID { get; set; }
 
         public string BookReadReview { get; set; }

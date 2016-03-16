@@ -85,3 +85,4 @@ C:\Users\maria.xavier\documents\visual studio 2015\Projects\BookList\BookList\ob
 C:\Users\maria.xavier\documents\visual studio 2015\Projects\BookList\BookList\obj\Debug\BookList.Migrations.Migration1.resources
 C:\Users\maria.xavier\documents\visual studio 2015\Projects\BookList\BookList\obj\Debug\BookList.Migrations.Migration2.resources
 C:\Users\maria.xavier\documents\visual studio 2015\Projects\BookList\BookList\obj\Debug\BookList.Migrations.Migration21.resources
+C:\Users\maria.xavier\documents\visual studio 2015\Projects\BookList\BookList\obj\Debug\BookList.Migrations.Migration3.resources
