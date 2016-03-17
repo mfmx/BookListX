@@ -8,9 +8,10 @@ using System.Web;
 namespace BookList.Models
 {
     public class BooksRead
-    {   [Key]
-        [Display(Name = "#")]
+    {
+        [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Display(Name = "#")]
         public int BookReadID { get; set; }
 
         [Display(Name="Book's Name")]

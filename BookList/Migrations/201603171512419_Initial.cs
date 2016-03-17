@@ -101,12 +101,12 @@ namespace BookList.Migrations
                 "dbo.WishLists",
                 c => new
                     {
-                        Id = c.String(nullable: false, maxLength: 128),
-                        WishListID = c.Int(nullable: false),
+                        WishListID = c.Int(nullable: false, identity: true),
                         BookReadID = c.Int(nullable: false),
+                        Id = c.String(),
                         BookDateEntered = c.DateTime(nullable: false),
                     })
-                .PrimaryKey(t => t.Id);
+                .PrimaryKey(t => t.WishListID);
             
         }
         

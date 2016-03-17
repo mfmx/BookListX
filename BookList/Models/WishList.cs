@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
 namespace BookList.Models
 {
     public class WishList
-    {   
-
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int WishListID { get; set; }
+
         public int BookReadID { get; set; }
         public string Id { get; set; }
 

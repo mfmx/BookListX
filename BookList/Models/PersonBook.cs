@@ -13,9 +13,6 @@ namespace BookList.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int PersonBookID { get; set; }
 
-      
-
-        
         public int BookReadID { get; set; }
       
         public string Id { get; set; }
