@@ -75,13 +75,15 @@ namespace BookList.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "BookReadID, Name,Author,Genre, DateEntered")] DisplayBook displayBook)
         {
+            var us = User.Identity.Name;
+            var user = db.Users.FirstOrDefault(x => x.Email == us);
+
             if (ModelState.IsValid)
             {
                 var addBook = (from a in db.BooksReads
                                where a.BookReadName == displayBook.Name
                                select a);
-                var us = User.Identity.Name;
-                var user = db.Users.FirstOrDefault(x => x.Email == us);
+               
 
                 if (addBook.Count() == 0)
                 {
