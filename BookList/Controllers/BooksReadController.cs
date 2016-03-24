@@ -93,6 +93,7 @@ namespace BookList.Controllers
                     newBook.BookReadAuthor = displayBook.Author;
 
                     db.BooksReads.Add(newBook);
+                    db.SaveChanges();
 
 
                     var newPB = new PersonBook();
@@ -154,7 +155,7 @@ namespace BookList.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "BookReadID, Name,Author,Genre, DateEntered")] DisplayBook displayBook)
+        public ActionResult Edit([Bind(Include = "BookReadID, Name,Author,Genre, DateEntered, PersonBookID")] DisplayBook displayBook)
         {
             
             if (ModelState.IsValid)
@@ -192,12 +193,20 @@ namespace BookList.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BooksRead booksRead = db.BooksReads.Find(id);
-            if (booksRead == null)
+            var us = User.Identity.Name;
+            var user = db.Users.FirstOrDefault(x => x.Email == us);
+
+
+            var books = db.PersonBooks.Where(x => x.Id == user.Id);
+            var results = (from PB in db.PersonBooks
+                           join BR in db.BooksReads on PB.BookReadID equals BR.BookReadID
+                           where PB.Id == user.Id && PB.PersonBookID == id.Value
+                           select new DisplayBook() { Author = BR.BookReadAuthor, Name = BR.BookReadName, Genre = BR.BookReadGenre, DateEntered = PB.BookDateEntered, BookReadID = BR.BookReadID, PersonBookID = PB.PersonBookID });
+            if (results.Count() == 0)
             {
                 return HttpNotFound();
             }
-            return View(booksRead);
+            return View(results.First());
         }
 
         // POST: BooksRead/Delete/5
@@ -205,8 +214,8 @@ namespace BookList.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            BooksRead booksRead = db.BooksReads.Find(id);
-            db.BooksReads.Remove(booksRead);
+            PersonBook personRead = db.PersonBooks.Find(id);
+            db.PersonBooks.Remove(personRead);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

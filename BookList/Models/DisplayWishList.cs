@@ -20,5 +20,8 @@ namespace BookList.Models
         public DateTime DateEntered { get; set; }
 
         public int WishListID { get; set; }
+
+        public int BookReadID { get; set; }
+
     }
 }
